@@ -99,7 +99,6 @@ export const App: FC = () => {
 
           setUser(usersData);
         } catch (error) {
-          throw new Error('Failed to fetch user data');
         }
       };
 
