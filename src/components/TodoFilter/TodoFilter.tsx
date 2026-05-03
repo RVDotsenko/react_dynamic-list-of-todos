@@ -2,12 +2,11 @@ import { FilterTodo } from '../../types/Filter';
 
 type Props = {
   onSelect: (filter: FilterTodo) => void;
-  value?: string | null;
-  setValue?: (value: string) => void;
-  onDeleteSearchInput?: () => void;
+  filteredValue?: string | null;
+  onSelectTodo?: (value: string) => void;
 };
 
-export const TodoFilter: React.FC<Props> = ({ onSelect, value, setValue }) => {
+export const TodoFilter: React.FC<Props> = ({ onSelect, filteredValue, onSelectTodo }) => {
   return (
     <form className="field has-addons">
       <p className="control">
@@ -16,7 +15,7 @@ export const TodoFilter: React.FC<Props> = ({ onSelect, value, setValue }) => {
             data-cy="statusSelect"
             onChange={e => onSelect(e.target.value as FilterTodo)}
           >
-            <option value="all">All</option>
+            <option defaultValue="all">All</option>
             <option value="active">Active</option>
             <option value="completed">Completed</option>
           </select>
@@ -29,21 +28,21 @@ export const TodoFilter: React.FC<Props> = ({ onSelect, value, setValue }) => {
           type="text"
           className="input"
           placeholder="Search..."
-          value={value || ''}
-          onChange={e => setValue && setValue(e.target.value)}
+          value={filteredValue || ''}
+          onChange={e => onSelectTodo && onSelectTodo(e.target.value)}
         />
         <span className="icon is-left">
           <i className="fas fa-magnifying-glass" />
         </span>
 
-        {value && (
+        {filteredValue && (
           <span className="icon is-right" style={{ pointerEvents: 'all' }}>
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
             <button
               data-cy="clearSearchButton"
               type="button"
               className="delete"
-              onClick={() => setValue && setValue('')}
+              onClick={() => onSelectTodo && onSelectTodo('')}
             />
           </span>
         )}

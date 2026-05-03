@@ -45,10 +45,13 @@ export const App: FC = () => {
           if (inputtedFilter) {
             return setFilteredTodos(
               activeTodos.filter(activeTodo =>
-                  activeTodo.title.toLowerCase().includes(inputtedFilter.toLowerCase()),
+                activeTodo.title
+                  .toLowerCase()
+                  .includes(inputtedFilter.toLowerCase()),
               ),
             );
-          } 
+          }
+
           return setFilteredTodos(activeTodos);
         case 'completed':
           const completedTodos = newTodos.filter(todo => todo.completed);
@@ -56,10 +59,13 @@ export const App: FC = () => {
           if (inputtedFilter) {
             return setFilteredTodos(
               completedTodos.filter(completedTodo =>
-                  completedTodo.title.toLowerCase().includes(inputtedFilter.toLowerCase()),
+                completedTodo.title
+                  .toLowerCase()
+                  .includes(inputtedFilter.toLowerCase()),
               ),
             );
           }
+
           return setFilteredTodos(completedTodos);
         default:
           return setFilteredTodos(todos);
@@ -77,6 +83,7 @@ export const App: FC = () => {
 
         setTodos(todosData);
       } catch (error) {
+        throw new Error('Failed to fetch todos data');
       } finally {
         setLoading(false);
       }
@@ -111,8 +118,8 @@ export const App: FC = () => {
             <div className="block">
               <TodoFilter
                 onSelect={setSelectedFilter}
-                value={inputtedFilter}
-                setValue={setInputtedFilter}
+                filteredValue={inputtedFilter}
+                onSelectTodo={setInputtedFilter}
               />
             </div>
 
@@ -120,7 +127,11 @@ export const App: FC = () => {
               {loading ? (
                 <Loader />
               ) : (
-                <TodoList todos={filteredTodos} callback={setSelectedTodo} selectedTodoId={selectedTodo?.id}/>
+                <TodoList
+                  todos={filteredTodos}
+                  onSelectTodo={setSelectedTodo}
+                  selectedTodoId={selectedTodo?.id}
+                />
               )}
             </div>
           </div>

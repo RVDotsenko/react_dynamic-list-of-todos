@@ -4,13 +4,13 @@ import cn from 'classnames';
 
 type Props = {
   todos: Todo[];
-  callback: (todo: Todo | null) => void;
+  onSelectTodo: (todo: Todo | null) => void;
   selectedTodoId?: number | null;
 };
 
 export const TodoList: React.FC<Props> = ({
   todos,
-  callback,
+  onSelectTodo,
   selectedTodoId,
 }) => (
   <table className="table is-narrow is-fullwidth">
@@ -51,16 +51,18 @@ export const TodoList: React.FC<Props> = ({
               className="button"
               type="button"
               onClick={() => {
-                callback(todo);
+                onSelectTodo(todo);
               }}
             >
               {selectedTodoId !== todo.id ? (
                 <span className="icon">
                   <i className="far fa-eye" />
                 </span>
-              ) : <span className="icon">
+              ) : (
+                <span className="icon">
                   <i className="far fa-eye-slash" />
-                </span>}
+                </span>
+              )}
             </button>
           </td>
         </tr>
