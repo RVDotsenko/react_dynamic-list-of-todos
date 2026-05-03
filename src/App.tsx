@@ -83,7 +83,6 @@ export const App: FC = () => {
 
         setTodos(todosData);
       } catch (error) {
-        throw new Error('Failed to fetch todos data');
       } finally {
         setLoading(false);
       }

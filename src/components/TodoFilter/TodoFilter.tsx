@@ -6,7 +6,11 @@ type Props = {
   onSelectTodo?: (value: string) => void;
 };
 
-export const TodoFilter: React.FC<Props> = ({ onSelect, filteredValue, onSelectTodo }) => {
+export const TodoFilter: React.FC<Props> = ({
+  onSelect,
+  filteredValue,
+  onSelectTodo,
+}) => {
   return (
     <form className="field has-addons">
       <p className="control">
@@ -14,8 +18,9 @@ export const TodoFilter: React.FC<Props> = ({ onSelect, filteredValue, onSelectT
           <select
             data-cy="statusSelect"
             onChange={e => onSelect(e.target.value as FilterTodo)}
+            defaultValue="all"
           >
-            <option defaultValue="all">All</option>
+            <option value="all">All</option>
             <option value="active">Active</option>
             <option value="completed">Completed</option>
           </select>
