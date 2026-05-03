@@ -2,12 +2,14 @@ import { FilterTodo } from '../../types/Filter';
 
 type Props = {
   onSelect: (filter: FilterTodo) => void;
+  selectedFilter: FilterTodo;
   filteredValue?: string | null;
   onSelectTodo?: (value: string) => void;
 };
 
 export const TodoFilter: React.FC<Props> = ({
   onSelect,
+  selectedFilter,
   filteredValue,
   onSelectTodo,
 }) => {
@@ -18,7 +20,7 @@ export const TodoFilter: React.FC<Props> = ({
           <select
             data-cy="statusSelect"
             onChange={e => onSelect(e.target.value as FilterTodo)}
-            value={filteredValue || 'all'}
+            value={selectedFilter || 'all'}
           >
             <option value="all">All</option>
             <option value="active">Active</option>

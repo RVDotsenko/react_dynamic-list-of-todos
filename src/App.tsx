@@ -98,8 +98,7 @@ export const App: FC = () => {
           const usersData = await getUser(selectedTodo.userId);
 
           setUser(usersData);
-        } catch (error) {
-        }
+        } catch (error) {}
       };
 
       fetchUser();
@@ -116,6 +115,7 @@ export const App: FC = () => {
             <div className="block">
               <TodoFilter
                 onSelect={setSelectedFilter}
+                selectedFilter={selectedFilter}
                 filteredValue={inputtedFilter}
                 onSelectTodo={setInputtedFilter}
               />
